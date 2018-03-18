@@ -4,4 +4,5 @@ use_frameworks!
 
 target 'MasterThesis' do
     pod 'Alamofire', '~> 4.7'
+    pod 'RealmSwift', '~> 3.2.0'
 end

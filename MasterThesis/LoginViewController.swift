@@ -36,18 +36,21 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         continueButton.isHidden = true
-        Alamofire.request(
-            URL(string: serverAddresses.checkIfMobileAppLoggedIn)!,
-            method: .post,
-            encoding: JSONEncoding.default).response(completionHandler: { (response) in
-                if let responseCode = response.response?.statusCode {
-                    if responseCode == 200 {
-                        self.continueButton.isHidden = false
-                    } else {
-                        self.continueButton.isHidden = true
-                    }
-                }
-            })
+        NetworkLayer().checkIfMobileAppIsLoggedIn { (responseCode) -> (Void) in
+            if responseCode == 200 {
+                self.continueButton.isHidden = false
+            } else {
+                self.continueButton.isHidden = true
+            }
+        }
+        //DatabaseLayer().checkCookie()
+        print("wywolane")
+        NetworkLayer().checkIfMobileAppIsLoggedIn { (responseCode) -> (Void) in
+            print("poczatek")
+            print(responseCode)
+            print("koniec")
+        }
+        print("zakończone")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -58,41 +61,34 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func signInButtonTouched(_ sender: UIButton) {
-        signInButton.isUserInteractionEnabled = false
-        loginTextField.isEnabled = false
-        passwordTextField.isEnabled = false
-        popLoadingView()
-        
         if let login = loginTextField.text {
-            // tutaj można dodać obostrzenia do loginu
             if let password = passwordTextField.text {
-                // tutaj można dodać obostrzenia do hasła
-                Alamofire.request(
-                    URL(string: serverAddresses.loginAddress)!,
-                    method: .post,
-                    parameters: ["Email": login, "Password": password],
-                    encoding: JSONEncoding.default).response(completionHandler: { (response) in
-                        if let responseCode = response.response?.statusCode {
-                            switch responseCode {
-                            case 200:
-                                self.removeLoadingView()
-                                self.performSegue(withIdentifier: "TakingImage", sender: nil)
-                            case 403:
-                                self.popsTheAlert(title: "Błąd", message: "Rozpoznaje twój email ale coś poszło nie tak")
-                            case 404:
-                                self.popsTheAlert(title: "Błąd", message: "Brak konta przypisanego do podanego emaila")
-                            default:
-                                self.popsTheAlert(title: "Błąd", message: "Spróbuj ponownie")
-                            }
-                            //if let cookies = HTTPCookieStorage.shared.cookies {
-                            //    print(cookies)
-                            //}
+                if password.count > 5 {
+                    signInButton.isUserInteractionEnabled = false
+                    loginTextField.isEnabled = false
+                    passwordTextField.isEnabled = false
+                    popLoadingView()
+                    
+                    NetworkLayer().performLogin(email: login, password: password, getResponseCode: { (responseCode) -> (Void) in
+                        switch responseCode {
+                        case 200:
                             self.removeLoadingView()
-                            self.signInButton.isUserInteractionEnabled = true
-                            self.loginTextField.isEnabled = true
-                            self.passwordTextField.isEnabled = true
+                            self.performSegue(withIdentifier: "TakingImage", sender: nil)
+                        case 403:
+                            self.popsTheAlert(title: "Błąd", message: "Rozpoznaje twój email ale coś poszło nie tak")
+                        case 404:
+                            self.popsTheAlert(title: "Błąd", message: "Brak konta przypisanego do podanego emaila")
+                        default:
+                            self.popsTheAlert(title: "Błąd", message: "Spróbuj ponownie")
                         }
+                        self.removeLoadingView()
+                        self.signInButton.isUserInteractionEnabled = true
+                        self.loginTextField.isEnabled = true
+                        self.passwordTextField.isEnabled = true
                     })
+                } else {
+                    popsTheAlert(title: "Błąd", message: "Hasło zbyt krótkie")
+                }
             }
         }
     }

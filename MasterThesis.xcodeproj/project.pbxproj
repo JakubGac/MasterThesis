@@ -12,7 +12,9 @@
 		27958A721FB200CC004F968F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27958A701FB200CC004F968F /* Main.storyboard */; };
 		27958A741FB200CC004F968F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27958A731FB200CC004F968F /* Assets.xcassets */; };
 		27958A771FB200CC004F968F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27958A751FB200CC004F968F /* LaunchScreen.storyboard */; };
+		27A3A521205C0A94009FEEDF /* DatabaseLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A3A520205C0A94009FEEDF /* DatabaseLayer.swift */; };
 		27E41C761FB88386005F77EE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E41C751FB88386005F77EE /* LoginViewController.swift */; };
+		27FDB8EC205BD92E006629A4 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FDB8EB205BD92E006629A4 /* NetworkLayer.swift */; };
 		E1BA1BF177D303904449B507 /* Pods_MasterThesis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 017416A01A74B676E51E7850 /* Pods_MasterThesis.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,7 +27,9 @@
 		27958A731FB200CC004F968F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27958A761FB200CC004F968F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		27958A781FB200CC004F968F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27A3A520205C0A94009FEEDF /* DatabaseLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseLayer.swift; sourceTree = "<group>"; };
 		27E41C751FB88386005F77EE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		27FDB8EB205BD92E006629A4 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
 		59F2E84D39A4183C6BEB1F05 /* Pods-MasterThesis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterThesis.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MasterThesis/Pods-MasterThesis.debug.xcconfig"; sourceTree = "<group>"; };
 		5E791A87E03CD3623278B41F /* Pods-MasterThesis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterThesis.release.xcconfig"; path = "Pods/Target Support Files/Pods-MasterThesis/Pods-MasterThesis.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,6 +69,8 @@
 			children = (
 				27958A6E1FB200CC004F968F /* TakingImageViewController.swift */,
 				27E41C751FB88386005F77EE /* LoginViewController.swift */,
+				27FDB8EB205BD92E006629A4 /* NetworkLayer.swift */,
+				27A3A520205C0A94009FEEDF /* DatabaseLayer.swift */,
 				27958A701FB200CC004F968F /* Main.storyboard */,
 				27958A781FB200CC004F968F /* Info.plist */,
 				27958A6C1FB200CC004F968F /* AppDelegate.swift */,
@@ -170,10 +176,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MasterThesis/Pods-MasterThesis-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -220,7 +230,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27FDB8EC205BD92E006629A4 /* NetworkLayer.swift in Sources */,
 				27E41C761FB88386005F77EE /* LoginViewController.swift in Sources */,
+				27A3A521205C0A94009FEEDF /* DatabaseLayer.swift in Sources */,
 				27958A6F1FB200CC004F968F /* TakingImageViewController.swift in Sources */,
 				27958A6D1FB200CC004F968F /* AppDelegate.swift in Sources */,
 			);

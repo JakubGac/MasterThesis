@@ -1,6 +1,5 @@
 import UIKit
 import AVFoundation
-import Alamofire
 
 class TakingImageViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
@@ -29,19 +28,8 @@ class TakingImageViewController: UIViewController, UIImagePickerControllerDelega
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
         
-        Alamofire.request(
-            URL(string: serverAddresses.getAlgorithmsAddress)!,
-            method: .post,
-            encoding: JSONEncoding.default).validate().responseJSON { (response) in
-                if let values = response.result.value {
-                    if let json = values as? NSDictionary {
-                        for (_, value) in json {
-                            if let tmp = value as? String {
-                                self.pickerDataSource.append(tmp)
-                            }
-                        }
-                    }
-                }
+        NetworkLayer().getAlgorithms { (algorithms) -> (Void) in
+            self.pickerDataSource = algorithms
         }
     }
     
@@ -99,63 +87,36 @@ class TakingImageViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     @IBAction func sendImageToProcess(_ sender: UIButton) {
-        popLoadingView()
         if let image = image {
-            let imageData = UIImageJPEGRepresentation(image, 0.5)!
+            popLoadingView()
+            let imageData = UIImageJPEGRepresentation(image, 1.0)!
             let parameters = ["selectedAlgorithm": pickerDataSource[pickedRow]];
-            
-            Alamofire.upload(multipartFormData: { (multipartFormData) in
-                //multipartFormData.append(imageData, withName: "selectedImage")
-                multipartFormData.append(imageData, withName: "selectedImage", fileName: "file.jpg", mimeType: "image/jpeg")
-                for (key, value) in parameters {
-                    multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
-                }
-            }, to: serverAddresses.imageUploading,
-               encodingCompletion: { (result) in
-                switch result {
-                case .success(let upload, _, _):
-                    //upload.uploadProgress(closure: { (progress) in
-                    //    print("Upload Progress: \(progress.fractionCompleted)")
-                    //})
-                    // kod odpowiedzi
-                    upload.responseJSON { response in
-                        if let code = response.response?.statusCode {
-                            if code == 200 {
-                                self.removeLoadingView()
-                                self.popsTheAlert(title: "OK", message: "Zdjęcie wysłane prawidłowo")
-                            } else {
-                                self.removeLoadingView()
-                                self.popsTheAlert(title: "Błąd", message: "Błąd w trakcie przetwarzania danych. Prosimy spróbować ponownie.")
-                            }
-                        }
-                    }
-                case .failure:
+            NetworkLayer().uploadImage(imageData: imageData, parameters: parameters, getResponseCode: { (responseCode) -> (Void) in
+                switch responseCode {
+                case 200:
                     self.removeLoadingView()
-                    self.popsTheAlert(title: "Błąd", message: "Błąd w trakcie przesyłania danych. Prosimy spróbować ponownie.")
+                    self.popsTheAlert(title: "OK", message: "Zdjęcie wysłane prawidłowo")
+                default:
+                    self.removeLoadingView()
+                    self.popsTheAlert(title: "Błąd", message: "Błąd w trakcie przetwarzania danych. Prosimy spróbować ponownie.")
                 }
             })
+        } else {
+            popsTheAlert(title: "Błąd", message: "Nie wybrano zdjęcia.")
         }
     }
     
     @IBAction func receiveImageFromProcessing(_ sender: UIButton) {
         popLoadingView()
-        Alamofire.request(
-            URL(string: serverAddresses.receiveImage)!,
-            method: .post,
-            encoding: JSONEncoding.default).validate().responseJSON { (response) in
-                if let responseCode = response.response?.statusCode {
-                    switch responseCode {
-                    case 200:
-                        self.removeLoadingView()
-                        self.popsTheAlert(title: "OK", message: "Odbiór zdjęcia zakończony prawidłowo")
-                        if let data = response.data {
-                            self.image = UIImage(data: data, scale: 1)
-                        }
-                    default:
-                        self.removeLoadingView()
-                        self.popsTheAlert(title: "Błąd", message: "Błąd w trakcie pobierania zdjęcia. Prosimy spróbować ponownie.")
-                    }
-                }
+        NetworkLayer().downloadImage { (responseCode, imageData) -> (Void) in
+            self.removeLoadingView()
+            switch responseCode {
+            case 200:
+                self.popsTheAlert(title: "OK", message: "Odbiór zdjęcia zakończony prawidłowo")
+                self.image = UIImage(data: imageData, scale: 1)
+            default:
+                self.popsTheAlert(title: "Błąd", message: "Błąd w trakcie pobierania zdjęcia. Prosimy spróbować ponownie.")
+            }
         }
     }
     
