@@ -15,7 +15,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var continueButton: UIButton!
     
     override func viewDidLoad() {
         let height = UIScreen.main.bounds.height / 22
@@ -25,32 +24,11 @@ class LoginViewController: UIViewController {
         passwordTextField.isSecureTextEntry = true
         signInButton.frame.size = CGSize(width: width/2, height: height)
         signInButton.layer.cornerRadius = height / 2
-        continueButton.frame.size = CGSize(width: width/2, height: height)
-        continueButton.layer.cornerRadius = height / 2
         
         signInButton.isUserInteractionEnabled = true
         signInButton.isEnabled = true
         loginTextField.isEnabled = true
         passwordTextField.isEnabled = true
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        continueButton.isHidden = true
-        NetworkLayer().checkIfMobileAppIsLoggedIn { (responseCode) -> (Void) in
-            if responseCode == 200 {
-                self.continueButton.isHidden = false
-            } else {
-                self.continueButton.isHidden = true
-            }
-        }
-        //DatabaseLayer().checkCookie()
-        print("wywolane")
-        NetworkLayer().checkIfMobileAppIsLoggedIn { (responseCode) -> (Void) in
-            print("poczatek")
-            print(responseCode)
-            print("koniec")
-        }
-        print("zakończone")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -92,10 +70,6 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    
-    @IBAction func continueButtonPressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "TakingImage", sender: nil)
-    }
 }
 
 public class Reachability {
@@ -124,15 +98,6 @@ public class Reachability {
 }
 
 extension UIViewController {
-    struct serverAddresses {
-        static let mainAddress = "http://192.168.0.21:62000/serwer/"
-        static let loginAddress = "\(mainAddress)Account/MobileLogin"
-        static let getAlgorithmsAddress = "\(mainAddress)MobileDevices/getAlgorithms"
-        static let imageUploading = "\(mainAddress)MobileDevices/handleImageFromMobileApp"
-        static let receiveImage = "\(mainAddress)MobileDevices/GetFileFromDisk"
-        static let checkIfMobileAppLoggedIn = "\(mainAddress)MobileDevices/checkIfMobileAppLoggedIn"
-    }
-    
     func popsTheAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)

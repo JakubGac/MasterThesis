@@ -20,13 +20,16 @@ class TakingImageViewController: UIViewController, UIImagePickerControllerDelega
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var pickerView: UIPickerView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imageView.isUserInteractionEnabled = false
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
+        
+        self.navigationItem.hidesBackButton = true
+        let backButton = UIBarButtonItem(title: "Wyloguj", style: .plain, target: self, action: #selector(TakingImageViewController.backButtonPressed(sender:)))
+        self.navigationItem.leftBarButtonItem = backButton
         
         NetworkLayer().getAlgorithms { (algorithms) -> (Void) in
             self.pickerDataSource = algorithms
@@ -36,14 +39,17 @@ class TakingImageViewController: UIViewController, UIImagePickerControllerDelega
     @IBAction func takingPhoto(_ sender: UIButton) {
         let picker = UIImagePickerController()
         picker.delegate = self
-        picker.allowsEditing = false
         picker.sourceType = UIImagePickerControllerSourceType.camera
         picker.cameraCaptureMode = .photo
         picker.modalPresentationStyle = .fullScreen
+        picker.allowsEditing = true
+        picker.showsCameraControls = true
+        picker.cameraFlashMode = .auto
+        
         present(picker, animated: true, completion: nil)
         // popracować nad dostępem
         /*if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            if AVCaptureDevice.authorizationStatus(for: .video) == .authorized {
+            if AVCaptureDevice.authorizationStatus(for: .video) == .authdorized {
                 
             } else {
                 noAccessAlert()
@@ -141,6 +147,18 @@ class TakingImageViewController: UIViewController, UIImagePickerControllerDelega
         })
         alert.addAction(cancelAction)
         alert.addAction(givePermissionAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc private func backButtonPressed(sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "Uwaga!", message: "Czy na pewno chcesz się wylogować?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Nie", style: .cancel, handler: nil)
+        let logOffAction = UIAlertAction(title: "Tak", style: .default) { (alert) in
+            NetworkLayer().deleteCookies()
+            self.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(logOffAction)
         self.present(alert, animated: true, completion: nil)
     }
     

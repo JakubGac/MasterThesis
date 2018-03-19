@@ -11,8 +11,9 @@ import Alamofire
 
 class NetworkLayer {
     private struct addresses {
-        static let main = "http://192.168.0.27:62000/serwer/"
+        static let main = "http://192.168.0.29:62000/serwer/"
         static let login = "\(main)Account/MobileLogin"
+        static let mobileLogOff = "\(main)Account/MobileLogOff"
         static let getAlgorithms = "\(main)MobileDevices/getAlgorithms"
         static let imageUploading = "\(main)MobileDevices/handleImageFromMobileApp"
         static let receiveImage = "\(main)MobileDevices/GetFileFromDisk"
@@ -26,11 +27,9 @@ class NetworkLayer {
             parameters: ["Email": email, "Password": password],
             encoding: JSONEncoding.default).response(completionHandler: { (response) in
                 if let headerFiles = response.response?.allHeaderFields as? [String: String], let url = response.request?.url {
+                    // saving cookies
                     let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFiles, for: url)
-                    //DatabaseLayer().saveCookie(cookie: cookies)
-                    for element in cookies {
-                        
-                    }
+                    DatabaseLayer().saveCookies(cookies: cookies)
                 }
                 if let statusCode = response.response?.statusCode {
                     getResponseCode(statusCode)
@@ -39,6 +38,7 @@ class NetworkLayer {
     }
     
     func checkIfMobileAppIsLoggedIn(getResponseCode: @escaping (Int) -> (Void)) {
+        DatabaseLayer().loadCookies()
         Alamofire.request(
             URL(string: addresses.checkIfMobileAppLoggedIn)!,
             method: .post,

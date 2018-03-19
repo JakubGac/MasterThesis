@@ -11,29 +11,27 @@ import Realm
 import RealmSwift
 
 class DatabaseLayer {
-    private let realm = try! Realm()
-    
-    class LoggedInPerson: Object {
-        @objc dynamic var cookie = [HTTPCookie]()
+    func saveCookies(cookies: [HTTPCookie]) {
+        var cookieArray = [[HTTPCookiePropertyKey: Any]]()
+        for cookie in cookies {
+            cookieArray.append(cookie.properties!)
+        }
+        UserDefaults.standard.set(cookieArray, forKey: "savedCookie")
+        UserDefaults.standard.synchronize()
     }
     
-    func saveCookie(cookie: [HTTPCookie]) {
-        if let loggedInPerson = realm.objects(LoggedInPerson.self).first {
-            loggedInPerson.cookie = cookie
-        } else {
-            let newLoggedInPerson = LoggedInPerson()
-            newLoggedInPerson.cookie = cookie
-            try! realm.write {
-                realm.add(newLoggedInPerson)
+    func loadCookies() {
+        guard let cookieArray = UserDefaults.standard.array(forKey: "savedCookie") as? [[HTTPCookiePropertyKey: Any]] else {
+            return
+        }
+        for cookieProperties in cookieArray {
+            if let cookie = HTTPCookie(properties: cookieProperties) {
+                HTTPCookieStorage.shared.setCookie(cookie)
             }
         }
     }
     
-    func checkCookie() {
-        if let loggedInPerson = realm.objects(LoggedInPerson.self).first {
-            print(loggedInPerson.cookie)
-        } else {
-            print("Brak cookie zapisanego w bazie")
-        }
+    func deleteCookies() {
+        UserDefaults.standard.removeObject(forKey: "savedCookie")
     }
 }

@@ -20,13 +20,10 @@
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
-                    <connections>
-                        <segue destination="pXf-YP-2cl" kind="relationship" relationship="rootViewController" id="qZe-1h-ni2"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="86H-h7-lSX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2206" y="45"/>
+            <point key="canvasLocation" x="-1894" y="64"/>
         </scene>
         <!--Witaj :) -->
         <scene sceneID="wUk-Fu-Xx3">
@@ -61,17 +58,6 @@
                                     <action selector="signInButtonTouched:" destination="pXf-YP-2cl" eventType="touchUpInside" id="ExK-kD-lWx"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gI-GI-5ZX">
-                                <rect key="frame" x="112" y="493" width="150" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.24046498537063599" green="0.77986711263656616" blue="0.99566179513931274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Kontynuuj">
-                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="continueButtonPressed:" destination="pXf-YP-2cl" eventType="touchUpInside" id="Wza-hk-Qsu"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="fsI-pS-arE"/>
@@ -80,16 +66,14 @@
                         <barButtonItem key="backBarButtonItem" title="Wyloguj" id="kZQ-SO-x8X"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="continueButton" destination="6gI-GI-5ZX" id="2Rv-23-5cO"/>
                         <outlet property="loginTextField" destination="ATq-hm-t9s" id="kgq-VM-kJL"/>
                         <outlet property="passwordTextField" destination="Yh1-ZR-zZL" id="Fjp-Rh-jPp"/>
                         <outlet property="signInButton" destination="b2A-5m-2UN" id="NR2-iX-5Yc"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="TakingImage" id="tbb-fb-frg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7pD-o7-2G6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1326" y="45"/>
+            <point key="canvasLocation" x="-567" y="-58"/>
         </scene>
         <!--Taking Image View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -131,14 +115,14 @@
                                 </connections>
                             </button>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="c4t-H1-lZR">
-                                <rect key="frame" x="49" y="207" width="277" height="201"/>
+                                <rect key="frame" x="49" y="163" width="277" height="245"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="gfp-VU-3IM" appends="YES" id="w9l-GK-YOu"/>
                                 </connections>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u54-LZ-djH">
-                                <rect key="frame" x="0.0" y="97" width="168" height="65"/>
+                                <rect key="frame" x="0.0" y="53" width="168" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="u1y-hR-9Tq"/>
                                 </constraints>
@@ -151,7 +135,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OhH-3a-BCO">
-                                <rect key="frame" x="176" y="97" width="199" height="65"/>
+                                <rect key="frame" x="176" y="53" width="199" height="65"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Odbierz foto">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -198,7 +182,57 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-444" y="45"/>
+            <point key="canvasLocation" x="-1705" y="932"/>
+        </scene>
+        <!--Item 2-->
+        <scene sceneID="11L-gG-j8Z">
+            <objects>
+                <viewController id="x9r-s8-dsm" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ocU-Vw-Bkx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="VZF-hN-AMS"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="TWV-EG-Ecd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pV0-3Q-53I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="386" y="1082"/>
+        </scene>
+        <!--Item 1-->
+        <scene sceneID="Rw0-Hj-P7t">
+            <objects>
+                <viewController id="DP6-d4-8t5" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="n8g-u7-XKB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="D8d-bC-8r7"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="Km6-qs-mX2"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="37h-gS-bnN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="386" y="418"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="cYz-d1-QPe">
+            <objects>
+                <tabBarController id="qPD-jf-Wad" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="t7y-QX-vKn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="DP6-d4-8t5" kind="relationship" relationship="viewControllers" id="Ud7-5v-iev"/>
+                        <segue destination="x9r-s8-dsm" kind="relationship" relationship="viewControllers" id="czh-a1-R6n"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="okB-XV-p0M" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-567" y="751"/>
         </scene>
     </scenes>
 </document>
