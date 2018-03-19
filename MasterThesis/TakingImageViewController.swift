@@ -154,7 +154,7 @@ class TakingImageViewController: UIViewController, UIImagePickerControllerDelega
         let alert = UIAlertController(title: "Uwaga!", message: "Czy na pewno chcesz się wylogować?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Nie", style: .cancel, handler: nil)
         let logOffAction = UIAlertAction(title: "Tak", style: .default) { (alert) in
-            NetworkLayer().deleteCookies()
+            DatabaseLayer().deleteCookies()
             self.navigationController?.popViewController(animated: true)
         }
         alert.addAction(cancelAction)
