@@ -15,18 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        UIViewController().popLoadingView()
-        NetworkLayer().checkIfMobileAppIsLoggedIn { (responseCode) -> (Void) in
-            if responseCode == 200 {
-                if let navigationController = self.window?.rootViewController as? UINavigationController {
-                    if let loginViewController = navigationController.viewControllers.first as? LoginViewController {
+        if let navigationController = window?.rootViewController as? UINavigationController {
+            if let loginViewController = navigationController.viewControllers.first as? LoginViewController {
+                loginViewController.popLoadingView()
+                NetworkLayer().checkIfMobileAppIsLoggedIn { (responseCode) -> (Void) in
+                    if responseCode == 200 {
+                        loginViewController.removeLoadingView()
                         loginViewController.performSegue(withIdentifier: "TakingImage", sender: nil)
                     }
                 }
+                loginViewController.removeLoadingView()
             }
         }
-        UIViewController().removeLoadingView()
         return true
     }
     

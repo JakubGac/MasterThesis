@@ -10,13 +10,18 @@ import UIKit
 import SystemConfiguration
 import Alamofire
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITabBarDelegate {
     
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var tabBar: UITabBar!
     
     override func viewDidLoad() {
+        self.hideKeyboardWhenTappedAround()
+        
+        tabBar.delegate = self
+        
         let height = UIScreen.main.bounds.height / 22
         let width = UIScreen.main.bounds.width * 0.8
         loginTextField.frame.size = CGSize(width: width, height: height)
@@ -48,6 +53,7 @@ class LoginViewController: UIViewController {
                     popLoadingView()
                     
                     NetworkLayer().performLogin(email: login, password: password, getResponseCode: { (responseCode) -> (Void) in
+                        print("login code: \(responseCode)")
                         switch responseCode {
                         case 200:
                             self.removeLoadingView()
@@ -69,6 +75,10 @@ class LoginViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        // dodac tutaj przejscie do ustawien
     }
 }
 
@@ -127,5 +137,15 @@ extension UIViewController {
         if let viewToRemove = self.view.viewWithTag(1001) {
             viewToRemove.removeFromSuperview()
         }
+    }
+    
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

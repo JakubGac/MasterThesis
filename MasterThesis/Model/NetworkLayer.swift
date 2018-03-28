@@ -10,8 +10,8 @@ import Foundation
 import Alamofire
 
 class NetworkLayer {
-    private struct addresses {
-        static let main = "http://192.168.0.29:62000/serwer/"
+    struct addresses {
+        static var main = "http://192.168.0.31:62000/serwer/"
         static let login = "\(main)Account/MobileLogin"
         static let mobileLogOff = "\(main)Account/MobileLogOff"
         static let getAlgorithms = "\(main)MobileDevices/getAlgorithms"

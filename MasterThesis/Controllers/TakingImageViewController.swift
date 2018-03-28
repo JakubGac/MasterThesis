@@ -20,16 +20,18 @@ class TakingImageViewController: UIViewController, UIImagePickerControllerDelega
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var takePhotoButton: UIButton!
+    @IBOutlet weak var pickPhotoFromLibraryButton: UIButton!
+    @IBOutlet weak var sendButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imageView.isUserInteractionEnabled = false
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
-        
-        self.navigationItem.hidesBackButton = true
-        let backButton = UIBarButtonItem(title: "Wyloguj", style: .plain, target: self, action: #selector(TakingImageViewController.backButtonPressed(sender:)))
-        self.navigationItem.leftBarButtonItem = backButton
+        takePhotoButton.layer.cornerRadius = takePhotoButton.frame.size.height/2
+        pickPhotoFromLibraryButton.layer.cornerRadius = pickPhotoFromLibraryButton.frame.size.height/2
+        sendButton.layer.cornerRadius = sendButton.frame.size.height/2
         
         NetworkLayer().getAlgorithms { (algorithms) -> (Void) in
             self.pickerDataSource = algorithms
@@ -88,7 +90,6 @@ class TakingImageViewController: UIViewController, UIImagePickerControllerDelega
         scrollView.addGestureRecognizer(tap)
         
         self.view.addSubview(scrollView)
-        self.navigationController?.isNavigationBarHidden = true
         self.tabBarController?.tabBar.isHidden = true
     }
     
@@ -112,22 +113,7 @@ class TakingImageViewController: UIViewController, UIImagePickerControllerDelega
         }
     }
     
-    @IBAction func receiveImageFromProcessing(_ sender: UIButton) {
-        popLoadingView()
-        NetworkLayer().downloadImage { (responseCode, imageData) -> (Void) in
-            self.removeLoadingView()
-            switch responseCode {
-            case 200:
-                self.popsTheAlert(title: "OK", message: "Odbiór zdjęcia zakończony prawidłowo")
-                self.image = UIImage(data: imageData, scale: 1)
-            default:
-                self.popsTheAlert(title: "Błąd", message: "Błąd w trakcie pobierania zdjęcia. Prosimy spróbować ponownie.")
-            }
-        }
-    }
-    
     @objc func dismissFullScreenImage(sender: UITapGestureRecognizer) {
-        self.navigationController?.isNavigationBarHidden = false
         self.tabBarController?.tabBar.isHidden = false
         sender.view?.removeFromSuperview()
     }
@@ -151,15 +137,7 @@ class TakingImageViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     @objc private func backButtonPressed(sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "Uwaga!", message: "Czy na pewno chcesz się wylogować?", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Nie", style: .cancel, handler: nil)
-        let logOffAction = UIAlertAction(title: "Tak", style: .default) { (alert) in
-            DatabaseLayer().deleteCookies()
-            self.navigationController?.popViewController(animated: true)
-        }
-        alert.addAction(cancelAction)
-        alert.addAction(logOffAction)
-        self.present(alert, animated: true, completion: nil)
+
     }
     
     // Mark: - Delegates
