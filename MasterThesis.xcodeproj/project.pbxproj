@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		270F10EB208CEF6300BBEE10 /* SettingsLoggedOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270F10EA208CEF6300BBEE10 /* SettingsLoggedOutViewController.swift */; };
+		270F10ED208CFCD500BBEE10 /* AddressesDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270F10EC208CFCD500BBEE10 /* AddressesDao.swift */; };
 		27916442206BC8D6004AA3D8 /* ReceiveImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27916441206BC8D6004AA3D8 /* ReceiveImageViewController.swift */; };
 		27958A6D1FB200CC004F968F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27958A6C1FB200CC004F968F /* AppDelegate.swift */; };
 		27958A6F1FB200CC004F968F /* TakingImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27958A6E1FB200CC004F968F /* TakingImageViewController.swift */; };
@@ -14,14 +16,16 @@
 		27958A741FB200CC004F968F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27958A731FB200CC004F968F /* Assets.xcassets */; };
 		27958A771FB200CC004F968F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27958A751FB200CC004F968F /* LaunchScreen.storyboard */; };
 		27A3A521205C0A94009FEEDF /* DatabaseLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A3A520205C0A94009FEEDF /* DatabaseLayer.swift */; };
-		27D94E56206A8D6500D78941 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D94E55206A8D6500D78941 /* SettingsViewController.swift */; };
+		27D94E56206A8D6500D78941 /* SettingsLoggedInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D94E55206A8D6500D78941 /* SettingsLoggedInViewController.swift */; };
 		27E41C761FB88386005F77EE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E41C751FB88386005F77EE /* LoginViewController.swift */; };
 		27FDB8EC205BD92E006629A4 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FDB8EB205BD92E006629A4 /* NetworkLayer.swift */; };
-		E1BA1BF177D303904449B507 /* Pods_MasterThesis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 017416A01A74B676E51E7850 /* Pods_MasterThesis.framework */; };
+		C4A434C44B692822D02CD34E /* Pods_MasterThesis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E92486270C09936799CE8BEB /* Pods_MasterThesis.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		017416A01A74B676E51E7850 /* Pods_MasterThesis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MasterThesis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22825536BDD2008BE344698C /* Pods-MasterThesis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterThesis.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MasterThesis/Pods-MasterThesis.debug.xcconfig"; sourceTree = "<group>"; };
+		270F10EA208CEF6300BBEE10 /* SettingsLoggedOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLoggedOutViewController.swift; sourceTree = "<group>"; };
+		270F10EC208CFCD500BBEE10 /* AddressesDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressesDao.swift; sourceTree = "<group>"; };
 		27916441206BC8D6004AA3D8 /* ReceiveImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveImageViewController.swift; sourceTree = "<group>"; };
 		27958A691FB200CC004F968F /* MasterThesis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MasterThesis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27958A6C1FB200CC004F968F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -31,11 +35,11 @@
 		27958A761FB200CC004F968F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		27958A781FB200CC004F968F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27A3A520205C0A94009FEEDF /* DatabaseLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseLayer.swift; sourceTree = "<group>"; };
-		27D94E55206A8D6500D78941 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		27D94E55206A8D6500D78941 /* SettingsLoggedInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLoggedInViewController.swift; sourceTree = "<group>"; };
 		27E41C751FB88386005F77EE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		27FDB8EB205BD92E006629A4 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
-		59F2E84D39A4183C6BEB1F05 /* Pods-MasterThesis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterThesis.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MasterThesis/Pods-MasterThesis.debug.xcconfig"; sourceTree = "<group>"; };
-		5E791A87E03CD3623278B41F /* Pods-MasterThesis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterThesis.release.xcconfig"; path = "Pods/Target Support Files/Pods-MasterThesis/Pods-MasterThesis.release.xcconfig"; sourceTree = "<group>"; };
+		727B17198AD90E531671754F /* Pods-MasterThesis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterThesis.release.xcconfig"; path = "Pods/Target Support Files/Pods-MasterThesis/Pods-MasterThesis.release.xcconfig"; sourceTree = "<group>"; };
+		E92486270C09936799CE8BEB /* Pods_MasterThesis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MasterThesis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,20 +47,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1BA1BF177D303904449B507 /* Pods_MasterThesis.framework in Frameworks */,
+				C4A434C44B692822D02CD34E /* Pods_MasterThesis.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		15424B0E7A080F39631079B5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E92486270C09936799CE8BEB /* Pods_MasterThesis.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		27958A601FB200CC004F968F = {
 			isa = PBXGroup;
 			children = (
 				27958A6B1FB200CC004F968F /* MasterThesis */,
 				27958A6A1FB200CC004F968F /* Products */,
-				C6D57F042A8C15F5081C86C8 /* Pods */,
-				5D39394DA938024C07F7C5D2 /* Frameworks */,
+				9C788966FC76D0B7F9BBF217 /* Pods */,
+				15424B0E7A080F39631079B5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,6 +107,7 @@
 			children = (
 				27FDB8EB205BD92E006629A4 /* NetworkLayer.swift */,
 				27A3A520205C0A94009FEEDF /* DatabaseLayer.swift */,
+				270F10EC208CFCD500BBEE10 /* AddressesDao.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -104,7 +117,8 @@
 			children = (
 				27958A6E1FB200CC004F968F /* TakingImageViewController.swift */,
 				27E41C751FB88386005F77EE /* LoginViewController.swift */,
-				27D94E55206A8D6500D78941 /* SettingsViewController.swift */,
+				27D94E55206A8D6500D78941 /* SettingsLoggedInViewController.swift */,
+				270F10EA208CEF6300BBEE10 /* SettingsLoggedOutViewController.swift */,
 				27916441206BC8D6004AA3D8 /* ReceiveImageViewController.swift */,
 			);
 			path = Controllers;
@@ -118,19 +132,11 @@
 			path = AppDelegate;
 			sourceTree = "<group>";
 		};
-		5D39394DA938024C07F7C5D2 /* Frameworks */ = {
+		9C788966FC76D0B7F9BBF217 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				017416A01A74B676E51E7850 /* Pods_MasterThesis.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C6D57F042A8C15F5081C86C8 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				59F2E84D39A4183C6BEB1F05 /* Pods-MasterThesis.debug.xcconfig */,
-				5E791A87E03CD3623278B41F /* Pods-MasterThesis.release.xcconfig */,
+				22825536BDD2008BE344698C /* Pods-MasterThesis.debug.xcconfig */,
+				727B17198AD90E531671754F /* Pods-MasterThesis.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -142,12 +148,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 27958A7B1FB200CC004F968F /* Build configuration list for PBXNativeTarget "MasterThesis" */;
 			buildPhases = (
-				EB58937329C1805B05384EEB /* [CP] Check Pods Manifest.lock */,
+				5976502C279B3EB2A2B00AA9 /* [CP] Check Pods Manifest.lock */,
 				27958A651FB200CC004F968F /* Sources */,
 				27958A661FB200CC004F968F /* Frameworks */,
 				27958A671FB200CC004F968F /* Resources */,
-				53D38E2192DEEC12B3726DBC /* [CP] Embed Pods Frameworks */,
-				9835238DD769744B238A047C /* [CP] Copy Pods Resources */,
+				5747954D21F7E9D2AE519C29 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -165,7 +170,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0910;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Jakub Gac";
 				TargetAttributes = {
 					27958A681FB200CC004F968F = {
@@ -206,7 +211,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		53D38E2192DEEC12B3726DBC /* [CP] Embed Pods Frameworks */ = {
+		5747954D21F7E9D2AE519C29 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -228,22 +233,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MasterThesis/Pods-MasterThesis-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9835238DD769744B238A047C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MasterThesis/Pods-MasterThesis-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EB58937329C1805B05384EEB /* [CP] Check Pods Manifest.lock */ = {
+		5976502C279B3EB2A2B00AA9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -270,11 +260,13 @@
 			files = (
 				27916442206BC8D6004AA3D8 /* ReceiveImageViewController.swift in Sources */,
 				27FDB8EC205BD92E006629A4 /* NetworkLayer.swift in Sources */,
+				270F10EB208CEF6300BBEE10 /* SettingsLoggedOutViewController.swift in Sources */,
 				27E41C761FB88386005F77EE /* LoginViewController.swift in Sources */,
 				27A3A521205C0A94009FEEDF /* DatabaseLayer.swift in Sources */,
 				27958A6F1FB200CC004F968F /* TakingImageViewController.swift in Sources */,
 				27958A6D1FB200CC004F968F /* AppDelegate.swift in Sources */,
-				27D94E56206A8D6500D78941 /* SettingsViewController.swift in Sources */,
+				270F10ED208CFCD500BBEE10 /* AddressesDao.swift in Sources */,
+				27D94E56206A8D6500D78941 /* SettingsLoggedInViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +306,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -321,6 +314,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -371,6 +365,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -378,6 +373,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -409,7 +405,7 @@
 		};
 		27958A7C1FB200CC004F968F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 59F2E84D39A4183C6BEB1F05 /* Pods-MasterThesis.debug.xcconfig */;
+			baseConfigurationReference = 22825536BDD2008BE344698C /* Pods-MasterThesis.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -425,7 +421,7 @@
 		};
 		27958A7D1FB200CC004F968F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5E791A87E03CD3623278B41F /* Pods-MasterThesis.release.xcconfig */;
+			baseConfigurationReference = 727B17198AD90E531671754F /* Pods-MasterThesis.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

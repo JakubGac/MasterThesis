@@ -10,52 +10,65 @@ import Foundation
 import Alamofire
 
 class NetworkLayer {
-    struct addresses {
-        static var main = "http://192.168.0.31:62000/serwer/"
-        static let login = "\(main)Account/MobileLogin"
-        static let mobileLogOff = "\(main)Account/MobileLogOff"
-        static let getAlgorithms = "\(main)MobileDevices/getAlgorithms"
-        static let imageUploading = "\(main)MobileDevices/handleImageFromMobileApp"
-        static let receiveImage = "\(main)MobileDevices/GetFileFromDisk"
-        static let checkIfMobileAppLoggedIn = "\(main)MobileDevices/checkIfMobileAppLoggedIn"
+    let sessionManager: Alamofire.SessionManager
+    
+    init() {
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 5.0
+        sessionManager = Alamofire.SessionManager(configuration: configuration)
     }
     
     func performLogin(email: String, password: String, getResponseCode: @escaping (Int) -> (Void)) {
-        Alamofire.request(
-            URL(string: addresses.login)!,
+        let address = AddressesDao().getAddress(name: .login)
+        sessionManager.request(
+            URL(string: address)!,
             method: .post,
             parameters: ["Email": email, "Password": password],
-            encoding: JSONEncoding.default).response(completionHandler: { (response) in
-                if let headerFiles = response.response?.allHeaderFields as? [String: String], let url = response.request?.url {
-                    // saving cookies
-                    let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFiles, for: url)
-                    DatabaseLayer().saveCookies(cookies: cookies)
+            encoding: JSONEncoding.default).responseData { (response) in
+                switch response.result {
+                case .success:
+                    if let headerFiles = response.response?.allHeaderFields as? [String: String], let url = response.request?.url {
+                        // saving cookies
+                        let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFiles, for: url)
+                        DatabaseLayer().saveCookies(cookies: cookies)
+                    }
+                    if let statusCode = response.response?.statusCode {
+                        getResponseCode(statusCode)
+                    }
+                case .failure:
+                    getResponseCode(0)
                 }
-                if let statusCode = response.response?.statusCode {
-                    getResponseCode(statusCode)
-                }
-            })
+        }
     }
     
     func checkIfMobileAppIsLoggedIn(getResponseCode: @escaping (Int) -> (Void)) {
         DatabaseLayer().loadCookies()
-        Alamofire.request(
-            URL(string: addresses.checkIfMobileAppLoggedIn)!,
+        let address = AddressesDao().getAddress(name: .checkIfMobileAppLoggedIn)
+        sessionManager.request(
+            URL(string: address)!,
             method: .post,
-            encoding: JSONEncoding.default).response(completionHandler: { (response) in
-                if let responseCode = response.response?.statusCode {
-                    getResponseCode(responseCode)
+            encoding: JSONEncoding.default).responseData { (response) in
+                switch response.result {
+                case .success:
+                    if let responseCode = response.response?.statusCode {
+                        getResponseCode(responseCode)
+                    }
+                    break
+                case .failure:
+                    getResponseCode(0)
+                    break
                 }
-            })
+        }
     }
     
     func uploadImage(imageData: Data, parameters: [String: String], getResponseCode: @escaping (Int) -> (Void)) {
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
+        let address = AddressesDao().getAddress(name: .imageUploading)
+        sessionManager.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(imageData, withName: "selectedImage", fileName: "file.jpg", mimeType: "image/jpeg")
             for (key, value) in parameters {
                 multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
             }
-        }, to: addresses.imageUploading,
+        }, to: address,
            encodingCompletion: { (result) in
             switch result {
             case .success(let upload, _, _):
@@ -74,8 +87,9 @@ class NetworkLayer {
     }
     
     func downloadImage(getResponseCode: @escaping (Int, Data) -> (Void)) {
-        Alamofire.request(
-            URL(string: addresses.receiveImage)!,
+        let address = AddressesDao().getAddress(name: .receiveImage)
+        sessionManager.request(
+            URL(string: address)!,
             method: .post,
             encoding: JSONEncoding.default).validate().responseJSON { (response) in
                 if let responseCode = response.response?.statusCode {
@@ -86,9 +100,48 @@ class NetworkLayer {
         }
     }
     
+    func getData(getDataFromProcessing: @escaping ([String]) -> (Void)) {
+        let address = AddressesDao().getAddress(name: .getData)
+        sessionManager.request(
+            URL(string: address)!,
+            method: .post,
+            encoding: JSONEncoding.default).validate().responseJSON { (response) in
+                if let values = response.result.value {
+                    if let json = values as? NSDictionary {
+                        //var arrayOfElements: [String] = []
+                        for (key, value) in json {
+                            if let key_to_element = key as? String {
+                                switch key_to_element {
+                                case "totalAmount":
+                                    print("calkowita liczba elementow: \(value)")
+                                case "data":
+                                    print("wartosci: \(value)")
+                                default:
+                                    break
+                                }
+                            }
+                        }
+                        //print(arrayOfElements)
+                    }
+                }
+                /*if let values = response.result.value {
+                    if let json = values as? NSDictionary {
+                        var arrayOfElements: [String] = []
+                        for (_, value) in json {
+                            if let tmp = value as? String {
+                                arrayOfElements.append(tmp)
+                            }
+                        }
+                        getDataFromProcessing(arrayOfElements)
+                    }
+                }*/
+        }
+    }
+    
     func getAlgorithms(getAlgorithms: @escaping ([String]) -> (Void)) {
-        Alamofire.request(
-            URL(string: addresses.getAlgorithms)!,
+        let address = AddressesDao().getAddress(name: .getAlgorithms)
+        sessionManager.request(
+            URL(string: address)!,
             method: .post,
             encoding: JSONEncoding.default).validate().responseJSON { (response) in
                 if let values = response.result.value {

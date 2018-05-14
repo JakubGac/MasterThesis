@@ -17,6 +17,8 @@ class LoginViewController: UIViewController, UITabBarDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var tabBar: UITabBar!
     
+    private var networkLayer = NetworkLayer()
+    
     override func viewDidLoad() {
         self.hideKeyboardWhenTappedAround()
         
@@ -52,7 +54,7 @@ class LoginViewController: UIViewController, UITabBarDelegate {
                     passwordTextField.isEnabled = false
                     popLoadingView()
                     
-                    NetworkLayer().performLogin(email: login, password: password, getResponseCode: { (responseCode) -> (Void) in
+                    networkLayer.performLogin(email: login, password: password, getResponseCode: { (responseCode) -> (Void) in
                         print("login code: \(responseCode)")
                         switch responseCode {
                         case 200:
@@ -78,7 +80,7 @@ class LoginViewController: UIViewController, UITabBarDelegate {
     }
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        // dodac tutaj przejscie do ustawien
+        performSegue(withIdentifier: "settingsLoggedOut", sender: nil)
     }
 }
 

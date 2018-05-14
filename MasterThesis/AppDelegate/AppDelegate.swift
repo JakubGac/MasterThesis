@@ -13,12 +13,22 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        AddressesDao().saveNewAddress(name: .main, string: "http://192.168.0.11:62000/serwer/")
+        AddressesDao().saveNewAddress(name: .login, string: "Account/MobileLogin")
+        AddressesDao().saveNewAddress(name: .mobileLogOff, string: "Account/MobileLogOff")
+        AddressesDao().saveNewAddress(name: .getAlgorithms, string: "MobileDevices/getAlgorithms")
+        AddressesDao().saveNewAddress(name: .imageUploading, string: "MobileDevices/handleImageFromMobileApp")
+        AddressesDao().saveNewAddress(name: .receiveImage, string: "MobileDevices/GetFileFromDisk")
+        AddressesDao().saveNewAddress(name: .checkIfMobileAppLoggedIn, string: "MobileDevices/checkIfMobileAppLoggedIn")
+        AddressesDao().saveNewAddress(name: .getData, string: "MobileDevices/getData")
+        
         if let navigationController = window?.rootViewController as? UINavigationController {
             if let loginViewController = navigationController.viewControllers.first as? LoginViewController {
                 loginViewController.popLoadingView()
                 NetworkLayer().checkIfMobileAppIsLoggedIn { (responseCode) -> (Void) in
+                    print(responseCode)
                     if responseCode == 200 {
                         loginViewController.removeLoadingView()
                         loginViewController.performSegue(withIdentifier: "TakingImage", sender: nil)
@@ -27,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 loginViewController.removeLoadingView()
             }
         }
+        
         return true
     }
     

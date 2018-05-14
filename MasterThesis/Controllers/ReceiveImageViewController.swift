@@ -17,6 +17,7 @@ class ReceiveImageViewController: UIViewController, UIScrollViewDelegate {
             imageView.image = image
         }
     }
+    private var networkLayer = NetworkLayer()
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var receiveButton: UIButton!
@@ -53,7 +54,7 @@ class ReceiveImageViewController: UIViewController, UIScrollViewDelegate {
     
     @IBAction func receiveImageFromProcessing(_ sender: UIButton) {
         popLoadingView()
-        NetworkLayer().downloadImage { (responseCode, imageData) -> (Void) in
+        networkLayer.downloadImage { (responseCode, imageData) -> (Void) in
             self.removeLoadingView()
             switch responseCode {
             case 200:
@@ -63,6 +64,10 @@ class ReceiveImageViewController: UIViewController, UIScrollViewDelegate {
             default:
                 self.popsTheAlert(title: "Błąd", message: "Błąd w trakcie pobierania zdjęcia. Prosimy spróbować ponownie.")
             }
+        }
+        
+        networkLayer.getData { (data) -> (Void) in
+            //print(data)
         }
     }
     

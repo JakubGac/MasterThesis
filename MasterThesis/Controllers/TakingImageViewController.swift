@@ -17,6 +17,7 @@ class TakingImageViewController: UIViewController, UIImagePickerControllerDelega
         }
     }
     private var pickedRow = 0
+    private var networkLayer = NetworkLayer()
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var pickerView: UIPickerView!
@@ -33,7 +34,7 @@ class TakingImageViewController: UIViewController, UIImagePickerControllerDelega
         pickPhotoFromLibraryButton.layer.cornerRadius = pickPhotoFromLibraryButton.frame.size.height/2
         sendButton.layer.cornerRadius = sendButton.frame.size.height/2
         
-        NetworkLayer().getAlgorithms { (algorithms) -> (Void) in
+        networkLayer.getAlgorithms { (algorithms) -> (Void) in
             self.pickerDataSource = algorithms
         }
     }
@@ -98,7 +99,7 @@ class TakingImageViewController: UIViewController, UIImagePickerControllerDelega
             popLoadingView()
             let imageData = UIImageJPEGRepresentation(image, 1.0)!
             let parameters = ["selectedAlgorithm": pickerDataSource[pickedRow]];
-            NetworkLayer().uploadImage(imageData: imageData, parameters: parameters, getResponseCode: { (responseCode) -> (Void) in
+            networkLayer.uploadImage(imageData: imageData, parameters: parameters, getResponseCode: { (responseCode) -> (Void) in
                 switch responseCode {
                 case 200:
                     self.removeLoadingView()
@@ -137,7 +138,7 @@ class TakingImageViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     @objc private func backButtonPressed(sender: UIBarButtonItem) {
-
+        
     }
     
     // Mark: - Delegates
