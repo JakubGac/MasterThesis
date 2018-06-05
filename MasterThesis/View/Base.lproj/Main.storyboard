@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CIn-Wf-Vbg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CIn-Wf-Vbg">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -326,12 +326,47 @@
                                     <action selector="receiveImageFromProcessing:" destination="LBz-CQ-u7y" eventType="touchUpInside" id="hJU-fq-Xcz"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mqR-7u-FQz">
+                                <rect key="frame" x="16" y="327" width="343" height="202"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="resultsCell" id="XPp-BK-bkH" customClass="ResultCell" customModule="MasterThesis" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XPp-BK-bkH" id="So8-Dr-mx3" customClass="ResultCell" customModule="MasterThesis" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXB-Le-lJs">
+                                                    <rect key="frame" x="15" y="11" width="313" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="gXB-Le-lJs" firstAttribute="centerY" secondItem="So8-Dr-mx3" secondAttribute="centerY" id="4yt-Sn-R69"/>
+                                                <constraint firstItem="gXB-Le-lJs" firstAttribute="centerX" secondItem="So8-Dr-mx3" secondAttribute="centerX" id="Ix9-d0-vxq"/>
+                                                <constraint firstItem="gXB-Le-lJs" firstAttribute="top" secondItem="So8-Dr-mx3" secondAttribute="topMargin" id="QwN-9p-U3S"/>
+                                                <constraint firstItem="gXB-Le-lJs" firstAttribute="leading" secondItem="So8-Dr-mx3" secondAttribute="leadingMargin" id="gzC-sp-Zsc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="resultLabel" destination="gXB-Le-lJs" id="YKp-VF-xwe"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="mqR-7u-FQz" firstAttribute="top" secondItem="g6A-gN-uG9" secondAttribute="bottom" constant="17" id="0AD-Un-xT6"/>
+                            <constraint firstItem="mqR-7u-FQz" firstAttribute="leading" secondItem="g6A-gN-uG9" secondAttribute="leading" id="0fH-l1-7Bi"/>
                             <constraint firstItem="g6A-gN-uG9" firstAttribute="trailing" secondItem="tEG-0n-G4C" secondAttribute="trailingMargin" id="IIj-55-eDx"/>
                             <constraint firstItem="adN-A3-Y7j" firstAttribute="bottom" secondItem="GdB-oI-qwS" secondAttribute="bottom" constant="21" id="L8f-AQ-gBE"/>
                             <constraint firstItem="g6A-gN-uG9" firstAttribute="leading" secondItem="tEG-0n-G4C" secondAttribute="leadingMargin" id="MXu-Jn-b2U"/>
+                            <constraint firstItem="mqR-7u-FQz" firstAttribute="trailing" secondItem="g6A-gN-uG9" secondAttribute="trailing" id="Qmt-hy-gng"/>
+                            <constraint firstItem="GdB-oI-qwS" firstAttribute="top" secondItem="mqR-7u-FQz" secondAttribute="bottom" constant="15" id="dL4-cj-JaX"/>
                             <constraint firstItem="g6A-gN-uG9" firstAttribute="top" secondItem="adN-A3-Y7j" secondAttribute="top" id="kDg-rb-mbk"/>
                             <constraint firstItem="GdB-oI-qwS" firstAttribute="leading" secondItem="adN-A3-Y7j" secondAttribute="leading" constant="87" id="rEF-t2-qlY"/>
                             <constraint firstItem="g6A-gN-uG9" firstAttribute="centerX" secondItem="GdB-oI-qwS" secondAttribute="centerX" id="roz-fM-xaR"/>
@@ -342,6 +377,7 @@
                     <connections>
                         <outlet property="imageView" destination="g6A-gN-uG9" id="KA2-YH-UNE"/>
                         <outlet property="receiveButton" destination="GdB-oI-qwS" id="BgW-p6-uHH"/>
+                        <outlet property="resultsTableView" destination="mqR-7u-FQz" id="i6w-ID-Gba"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Gu-lc-b4t" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -351,7 +387,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-367" y="690"/>
+            <point key="canvasLocation" x="-367.19999999999999" y="689.5052473763119"/>
         </scene>
         <!--TabView-->
         <scene sceneID="bN7-j7-EAT">

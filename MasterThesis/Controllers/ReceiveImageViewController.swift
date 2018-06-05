@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReceiveImageViewController: UIViewController, UIScrollViewDelegate {
+class ReceiveImageViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
     private var newImageView = UIImageView()
     private var image: UIImage! {
@@ -21,10 +21,13 @@ class ReceiveImageViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var receiveButton: UIButton!
+    @IBOutlet weak var resultsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imageView.isUserInteractionEnabled = false
+        resultsTableView.delegate = self
+        resultsTableView.dataSource = self
         
         receiveButton.layer.cornerRadius = receiveButton.frame.size.height/2
     }
@@ -67,7 +70,7 @@ class ReceiveImageViewController: UIViewController, UIScrollViewDelegate {
         }
         
         networkLayer.getData { (data) -> (Void) in
-            //print(data)
+            print(data)
         }
     }
     
@@ -84,5 +87,48 @@ class ReceiveImageViewController: UIViewController, UIScrollViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
+    }
+    
+    // table view
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "resultsCell", for: indexPath)
+        if let resultCell = cell as? ResultCell {
+            resultCell.data = "Kuba"
+            resultCell.color = UIColor.red
+        }
+        return cell
+    }
+}
+
+class ResultCell: UITableViewCell {
+    @IBOutlet weak var resultLabel: UILabel!
+    var data: String? {
+        didSet {
+            updateData()
+        }
+    }
+    var color: UIColor? {
+        didSet {
+            updateColor()
+        }
+    }
+    
+    private func updateData() {
+        // reset any existing informations
+        resultLabel.text = ""
+        resultLabel.textAlignment = .center
+        
+        resultLabel.text = data
+    }
+    
+    private func updateColor() {
+        // reset any existing informations
+        resultLabel.textColor = UIColor.black
+        
+        resultLabel.textColor = color
     }
 }

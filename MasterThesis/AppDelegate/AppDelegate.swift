@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        AddressesDao().saveNewAddress(name: .main, string: "http://192.168.0.11:62000/serwer/")
+        AddressesDao().saveNewAddress(name: .main, string: "http://192.168.0.13:62000/serwer/")
         AddressesDao().saveNewAddress(name: .login, string: "Account/MobileLogin")
         AddressesDao().saveNewAddress(name: .mobileLogOff, string: "Account/MobileLogOff")
         AddressesDao().saveNewAddress(name: .getAlgorithms, string: "MobileDevices/getAlgorithms")

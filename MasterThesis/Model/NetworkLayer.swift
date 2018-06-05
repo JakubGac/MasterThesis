@@ -101,6 +101,8 @@ class NetworkLayer {
     }
     
     func getData(getDataFromProcessing: @escaping ([String]) -> (Void)) {
+        let data = (String, String, String, String).self
+        let arrayOfData = [data]
         let address = AddressesDao().getAddress(name: .getData)
         sessionManager.request(
             URL(string: address)!,
@@ -108,14 +110,15 @@ class NetworkLayer {
             encoding: JSONEncoding.default).validate().responseJSON { (response) in
                 if let values = response.result.value {
                     if let json = values as? NSDictionary {
-                        //var arrayOfElements: [String] = []
                         for (key, value) in json {
                             if let key_to_element = key as? String {
                                 switch key_to_element {
-                                case "totalAmount":
+                                case "iloscPaleczek":
                                     print("calkowita liczba elementow: \(value)")
-                                case "data":
+                                case "dlugosciPaleczek":
                                     print("wartosci: \(value)")
+                                    //wartosci: ( (1, "5.067602897482973", 242, 81, 244 ), ( 2, "2.301431876690958", 241, 147, 210 ), ( 3, "1.876497169655953", 78, 134, 233 ) )
+                                    
                                 default:
                                     break
                                 }
