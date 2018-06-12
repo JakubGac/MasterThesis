@@ -127,17 +127,6 @@ class NetworkLayer {
                         //print(arrayOfElements)
                     }
                 }
-                /*if let values = response.result.value {
-                    if let json = values as? NSDictionary {
-                        var arrayOfElements: [String] = []
-                        for (_, value) in json {
-                            if let tmp = value as? String {
-                                arrayOfElements.append(tmp)
-                            }
-                        }
-                        getDataFromProcessing(arrayOfElements)
-                    }
-                }*/
         }
     }
     

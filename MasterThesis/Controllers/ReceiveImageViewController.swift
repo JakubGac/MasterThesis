@@ -18,6 +18,7 @@ class ReceiveImageViewController: UIViewController, UIScrollViewDelegate, UITabl
         }
     }
     private var networkLayer = NetworkLayer()
+    private var results = [(data: Double, red: Double, green: Double, blue: Double)]()
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var receiveButton: UIButton!
@@ -30,6 +31,10 @@ class ReceiveImageViewController: UIViewController, UIScrollViewDelegate, UITabl
         resultsTableView.dataSource = self
         
         receiveButton.layer.cornerRadius = receiveButton.frame.size.height/2
+        
+        results.append((20, 255, 0, 0))
+        results.append((40, 0, 255, 0))
+        results.append((50, 0, 0, 255))
     }
 
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
@@ -91,14 +96,15 @@ class ReceiveImageViewController: UIViewController, UIScrollViewDelegate, UITabl
     
     // table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return results.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultsCell", for: indexPath)
         if let resultCell = cell as? ResultCell {
-            resultCell.data = "Kuba"
-            resultCell.color = UIColor.red
+            let element = results[indexPath.row]
+            resultCell.data = "Pałeczka nr \(indexPath.row+1) - \(element.data)"
+            resultCell.color = UIColor(red: CGFloat(element.red), green: CGFloat(element.green), blue: CGFloat(element.blue), alpha: 1)
         }
         return cell
     }
