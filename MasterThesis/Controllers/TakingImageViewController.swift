@@ -37,6 +37,11 @@ class TakingImageViewController: UIViewController, UIImagePickerControllerDelega
         networkLayer.getAlgorithms { (algorithms) -> (Void) in
             self.pickerDataSource = algorithms
         }
+        
+        pickerDataSource.append("jedna_probka")
+        pickerDataSource.append("cale_szkielko")
+        pickerDataSource.append("caly_obraz_1")
+        pickerDataSource.append("caly_obraz_2")
     }
     
     @IBAction func takingPhoto(_ sender: UIButton) {

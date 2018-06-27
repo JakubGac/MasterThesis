@@ -18,7 +18,11 @@ class ReceiveImageViewController: UIViewController, UIScrollViewDelegate, UITabl
         }
     }
     private var networkLayer = NetworkLayer()
-    private var results = [(data: Double, red: Double, green: Double, blue: Double)]()
+    private var results = [(data: Double, red: Double, green: Double, blue: Double)]() {
+        didSet {
+            resultsTableView.reloadData()
+        }
+    }
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var receiveButton: UIButton!
@@ -31,10 +35,6 @@ class ReceiveImageViewController: UIViewController, UIScrollViewDelegate, UITabl
         resultsTableView.dataSource = self
         
         receiveButton.layer.cornerRadius = receiveButton.frame.size.height/2
-        
-        results.append((20, 255, 0, 0))
-        results.append((40, 0, 255, 0))
-        results.append((50, 0, 0, 255))
     }
 
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
@@ -75,7 +75,9 @@ class ReceiveImageViewController: UIViewController, UIScrollViewDelegate, UITabl
         }
         
         networkLayer.getData { (data) -> (Void) in
-            print(data)
+            for element in data {
+                self.results.append((element.data, element.red, element.green, element.blue))
+            }
         }
     }
     
@@ -104,7 +106,7 @@ class ReceiveImageViewController: UIViewController, UIScrollViewDelegate, UITabl
         if let resultCell = cell as? ResultCell {
             let element = results[indexPath.row]
             resultCell.data = "Pałeczka nr \(indexPath.row+1) - \(element.data)"
-            resultCell.color = UIColor(red: CGFloat(element.red), green: CGFloat(element.green), blue: CGFloat(element.blue), alpha: 1)
+            resultCell.color = UIColor(red: CGFloat(element.red/255), green: CGFloat(element.green/255), blue: CGFloat(element.blue/255), alpha: 1)
         }
         return cell
     }

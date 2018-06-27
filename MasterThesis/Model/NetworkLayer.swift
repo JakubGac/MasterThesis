@@ -100,9 +100,8 @@ class NetworkLayer {
         }
     }
     
-    func getData(getDataFromProcessing: @escaping ([String]) -> (Void)) {
-        let data = (String, String, String, String).self
-        let arrayOfData = [data]
+    func getData(getDataFromProcessing: @escaping ([(data: Double, red: Double, green: Double, blue: Double)]) -> (Void)) {
+        var arrayOfData = [(data: Double, red: Double, green: Double, blue: Double)]()
         let address = AddressesDao().getAddress(name: .getData)
         sessionManager.request(
             URL(string: address)!,
@@ -116,15 +115,17 @@ class NetworkLayer {
                                 case "iloscPaleczek":
                                     print("calkowita liczba elementow: \(value)")
                                 case "dlugosciPaleczek":
-                                    print("wartosci: \(value)")
-                                    //wartosci: ( (1, "5.067602897482973", 242, 81, 244 ), ( 2, "2.301431876690958", 241, 147, 210 ), ( 3, "1.876497169655953", 78, 134, 233 ) )
-                                    
+                                    if let values = value as? [[Double]] {
+                                        for element in values {
+                                            arrayOfData.append((element[1], element[2], element[3], element[4]))
+                                        }
+                                        getDataFromProcessing(arrayOfData)
+                                    }
                                 default:
                                     break
                                 }
                             }
                         }
-                        //print(arrayOfElements)
                     }
                 }
         }
